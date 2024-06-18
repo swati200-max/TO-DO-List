@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TO DO LIST</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="box">
+            <h2>TO DO LIST</h2>
+            <input type="text" placeholder="write here...." id="inputBx">
+            <ul id="list"></ul>
+        </div>
+    </div>
+    <script>
+        let inputBx = document.querySelector('#inputBx');
+        let list = document.querySelector('#list');
+
+        inputBx.addEventListener("keyup", function(event) {
+            if (event.key === "Enter") {
+                addItem(this.value);
+                this.value = "";
+            }
+        });
+
+        let addItem = (inputBx) => {
+            let listItem = document.createElement("li");
+            listItem.innerHTML = `${inputBx}<i></i>`;
+            
+            listItem.addEventListener("click", function() {
+                this.classList.toggle('done');
+            });
+
+            list.appendChild(listItem);
+
+            let deleteIcon = listItem.querySelector("i");
+            deleteIcon.addEventListener("click", function(event) {
+                event.stopPropagation();
+                listItem.remove();
+            });
+        }
+    </script>
+</body>
+</html>
